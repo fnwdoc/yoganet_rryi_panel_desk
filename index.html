@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="pt-PT" data-theme="sand">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesa de Deliberação Estratégica &amp; Conformidade — YOGANET Hub | Erasmus+ KA210-VET</title>
+  <link rel="icon" type="image/png" href="assets/FNWNEWLogo_26.png">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans + Playfair Display + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* TEMAS PASTEL DINÂMICOS */
+    :root, [data-theme="sand"] {
+      --bg-canvas: #FAF6F0;
+      --bg-surface: #FFFFFF;
+      --bg-card-subtle: #F3ECE2;
+      --border-color: #E6DCD1;
+      --text-main: #2A2622;
+      --text-muted: #6E665D;
+      --accent-primary: #385144;
+      --accent-soft: #D9886E;
+      --accent-badge-bg: #EAE3D7;
+      --accent-badge-text: #4A4036;
+      --eu-blue: #003399;
+      --eu-gold: #FFCC00;
+    }
+
+    [data-theme="sage"] {
+      --bg-canvas: #F2F5F3;
+      --bg-surface: #FFFFFF;
+      --bg-card-subtle: #E5EBE7;
+      --border-color: #D3DED6;
+      --text-main: #1F2B24;
+      --text-muted: #586B60;
+      --accent-primary: #2D4C3C;
+      --accent-soft: #5C8770;
+      --accent-badge-bg: #DCE5DF;
+      --accent-badge-text: #263C30;
+      --eu-blue: #003399;
+      --eu-gold: #FFCC00;
+    }
+
+    [data-theme="lavender"] {
+      --bg-canvas: #F4F4F8;
+      --bg-surface: #FFFFFF;
+      --bg-card-subtle: #E9E9F1;
+      --border-color: #D8D8E5;
+      --text-main: #242232;
+      --text-muted: #605C76;
+      --accent-primary: #3A355A;
+      --accent-soft: #7C73A6;
+      --accent-badge-bg: #E2E1EE;
+      --accent-badge-text: #373356;
+      --eu-blue: #003399;
+      --eu-gold: #FFCC00;
+    }
+
+    [data-theme="peach"] {
+      --bg-canvas: #FAF4F1;
+      --bg-surface: #FFFFFF;
+      --bg-card-subtle: #F2E7E2;
+      --border-color: #E5D5CE;
+      --text-main: #2F2320;
+      --text-muted: #725D56;
+      --accent-primary: #59352E;
+      --accent-soft: #B86E5E;
+      --accent-badge-bg: #ECDCD5;
+      --accent-badge-text: #50312A;
+      --eu-blue: #003399;
+      --eu-gold: #FFCC00;
+    }
+
+    [data-theme="mono"] {
+      --bg-canvas: #F6F6F7;
+      --bg-surface: #FFFFFF;
+      --bg-card-subtle: #ECECED;
+      --border-color: #D8D8DA;
+      --text-main: #18181A;
+      --text-muted: #5E5E65;
+      --accent-primary: #18181A;
+      --accent-soft: #424248;
+      --accent-badge-bg: #E3E3E6;
+      --accent-badge-text: #18181A;
+      --eu-blue: #003399;
+      --eu-gold: #FFCC00;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      overflow-x: hidden;
+    }
+
+    .card-surface {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 20px -3px rgba(0, 0, 0, 0.03);
+    }
+
+    .card-subtle {
+      background-color: var(--bg-card-subtle);
+      border: 1px solid var(--border-color);
+    }
+
+    /* ACCORDION DETAIL STYLES */
+    details summary {
+      cursor: pointer;
+      user-select: none;
+    }
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+    details[open] summary .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 9999px;
+    }
+
+    /* TRANSIÇÕES DAS 3 COLUNAS */
+    #navSidebar, #consensusSidebar {
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                  margin 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.25s ease;
+    }
+    #scalableContent {
+      transition: zoom 0.2s ease, transform 0.2s ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen custom-scroll flex flex-col">
+
+  <!-- ============================================================== -->
+  <!-- BARRA DE CONFORMIDADE OFICIAL ERASMUS+                         -->
+  <!-- ============================================================== -->
+  <div class="bg-[#003399] text-white py-2 px-4 text-xs tracking-wide border-b border-[#FFCC00]/30 shadow-xs z-50">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 font-bold text-[#FFCC00]">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
+          Erasmus+ KA210-VET
+        </span>
+        <span class="text-white/40">•</span>
+        <span class="font-mono text-[11px] text-white/90">2025-1-PT01-KA210-VET-000360491</span>
+        <span class="text-white/40 hidden md:inline">•</span>
+        <span class="text-white/80 hidden md:inline">Coordenador: Espaço Vistara · Parceiro: AMYD</span>
+      </div>
+      <div class="text-[11px] text-[#FFCC00] font-medium flex items-center gap-1.5">
+        <span>Financiado pela União Europeia · Lump Sum 60.000 €</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- HEADER INSTITUCIONAL (COCKPIT 3 COLUNAS CONTROLS)              -->
+  <!-- ============================================================== -->
+  <header class="card-surface sticky top-0 z-40 px-3 sm:px-5 py-2.5 border-b backdrop-blur-md bg-opacity-95 shadow-xs">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+      
+      <!-- Esquerda: Toggle Menu (Esq) + Logo FNW P&B + Título -->
+      <div class="flex items-center gap-2.5">
+        <!-- BOTÃO TOGGLE DA SIDEBAR ESQUERDA -->
+        <button id="btnToggleNav" onclick="toggleNavSidebar()" class="px-2.5 py-1.5 rounded-xl card-subtle hover:bg-opacity-80 transition flex items-center gap-1.5 text-xs font-semibold text-[var(--accent-primary)]" title="Ocultar / Mostrar Menu Lateral">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+          <span class="hidden md:inline font-mono text-[11px]" id="labelNavToggle">MENU</span>
+        </button>
+
+        <!-- Logo FNW Oficial P&B -->
+        <img src="assets/FNWNEWLogo_26.png" alt="FNW" class="h-8 sm:h-9 w-auto object-contain" />
+        
+        <div class="border-l border-[var(--border-color)] pl-2.5 hidden sm:block">
+          <div class="flex items-center gap-2">
+            <h1 class="text-xs sm:text-sm font-bold font-serif text-[var(--accent-primary)]">Mesa de Deliberação Estratégica</h1>
+            <span class="text-[9px] font-mono px-2 py-0.2 rounded-full bg-[var(--accent-badge-bg)] text-[var(--accent-badge-text)] font-semibold">YOGANET HUB</span>
+          </div>
+          <p class="text-[10px] text-[var(--text-muted)]">Lead Enterprise Architect: <strong>Alex Sobral</strong> · Vistara &amp; Consórcio</p>
+        </div>
+      </div>
+
+      <!-- Centro: Controles de Zoom do Conteúdo Central -->
+      <div class="flex items-center gap-1.5 p-1 rounded-xl card-subtle border border-[var(--border-color)] text-xs">
+        <span class="text-[10px] font-mono text-[var(--text-muted)] px-1.5 hidden lg:inline">Zoom:</span>
+        <button onclick="changeZoom(-0.05)" class="w-6 h-6 rounded-lg bg-white/70 hover:bg-white flex items-center justify-center font-bold text-xs transition" title="Diminuir texto">-</button>
+        <span id="zoomDisplay" class="font-mono text-[11px] px-1 font-semibold text-[var(--accent-primary)]">100%</span>
+        <button onclick="changeZoom(0.05)" class="w-6 h-6 rounded-lg bg-white/70 hover:bg-white flex items-center justify-center font-bold text-xs transition" title="Aumentar texto">+</button>
+        <button onclick="resetZoom()" class="text-[10px] px-1.5 text-[var(--text-muted)] hover:text-[var(--text-main)] font-mono" title="Resetar escala">1:1</button>
+      </div>
+
+      <!-- Direita: Toggle Painel de Consenso (Dir) + Paleta Popover -->
+      <div class="flex items-center gap-2">
+        
+        <!-- Botão Toggle do Quadro de Consenso Direita -->
+        <button id="btnToggleConsensus" onclick="toggleConsensusSidebar()" class="px-2.5 py-1.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 hover:bg-emerald-500/25 transition flex items-center gap-1.5 text-xs font-semibold" title="Ocultar / Mostrar Quadro Dinâmico de Consenso">
+          <span>⚖️</span>
+          <span class="font-mono text-[11px]">CONSENSO</span>
+          <span id="headerPillCount" class="font-mono bg-emerald-800 text-white px-1.5 py-0.2 rounded-full text-[10px]">1/7</span>
+        </button>
+
+        <!-- Popover da Paleta Pastel -->
+        <div class="relative">
+          <button id="btnPaletteDropdown" onclick="togglePaletteMenu()" class="p-2 sm:px-2.5 sm:py-1.5 rounded-xl card-subtle hover:bg-opacity-80 transition flex items-center gap-1.5 text-xs font-medium text-[var(--text-main)]" title="Escolher Paleta Pastel">
+            <span class="text-sm">🎨</span>
+            <span class="hidden xl:inline text-[11px] text-[var(--text-muted)]">Tema</span>
+          </button>
+
+          <!-- Menu Popover da Paleta Pastel -->
+          <div id="paletteDropdown" class="hidden absolute right-0 mt-2 p-3 rounded-2xl card-surface shadow-2xl z-50 border border-[var(--border-color)] w-52 space-y-1.5">
+            <div class="flex justify-between items-center border-b border-[var(--border-color)] pb-1.5 mb-1">
+              <span class="text-[10px] uppercase font-mono font-bold tracking-wider text-[var(--text-muted)]">Paleta Pastel</span>
+              <span class="text-[9px] text-[var(--accent-soft)] font-mono">5 Estilos</span>
+            </div>
+            <button onclick="setTheme('sand')" class="w-full flex items-center justify-between p-1.5 rounded-lg hover:bg-[var(--bg-card-subtle)] transition text-left text-xs">
+              <span class="flex items-center gap-2 text-[11px]">
+                <span class="w-3.5 h-3.5 rounded-full bg-[#FAF6F0] border-2 border-[#D9886E] inline-block"></span>
+                <span>Areia &amp; Linho</span>
+              </span>
+              <span class="text-[9px] font-mono text-[var(--text-muted)]">Padrão</span>
+            </button>
+            <button onclick="setTheme('sage')" class="w-full flex items-center justify-between p-1.5 rounded-lg hover:bg-[var(--bg-card-subtle)] transition text-left text-xs">
+              <span class="flex items-center gap-2 text-[11px]">
+                <span class="w-3.5 h-3.5 rounded-full bg-[#E5EBE7] border-2 border-[#5C8770] inline-block"></span>
+                <span>Sálvia &amp; Eucalipto</span>
+              </span>
+            </button>
+            <button onclick="setTheme('lavender')" class="w-full flex items-center justify-between p-1.5 rounded-lg hover:bg-[var(--bg-card-subtle)] transition text-left text-xs">
+              <span class="flex items-center gap-2 text-[11px]">
+                <span class="w-3.5 h-3.5 rounded-full bg-[#E9E9F1] border-2 border-[#7C73A6] inline-block"></span>
+                <span>Lavanda &amp; Céu</span>
+              </span>
+            </button>
+            <button onclick="setTheme('peach')" class="w-full flex items-center justify-between p-1.5 rounded-lg hover:bg-[var(--bg-card-subtle)] transition text-left text-xs">
+              <span class="flex items-center gap-2 text-[11px]">
+                <span class="w-3.5 h-3.5 rounded-full bg-[#F2E7E2] border-2 border-[#B86E5E] inline-block"></span>
+                <span>Pêssego Suave</span>
+              </span>
+            </button>
+            <button onclick="setTheme('mono')" class="w-full flex items-center justify-between p-1.5 rounded-lg hover:bg-[var(--bg-card-subtle)] transition text-left text-xs">
+              <span class="flex items-center gap-2 text-[11px]">
+                <span class="w-3.5 h-3.5 rounded-full bg-[#ECECED] border-2 border-[#18181A] inline-block"></span>
+                <span>Monocromo Minimal</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- ARQUITETURA COCKPIT: 3 COLUNAS SINCRONIZADAS EM TEMPO REAL     -->
+  <!-- ============================================================== -->
+  <div id="cockpitContainer" class="flex flex-1 w-full relative overflow-hidden">
+
+    <!-- ============================================================ -->
+    <!-- 1. COLUNA ESQUERDA: NAVEGAÇÃO & ÂNCORAS TEMÁTICAS            -->
+    <!-- ============================================================ -->
+    <aside id="navSidebar" class="w-64 lg:w-72 flex-shrink-0 card-surface border-r border-[var(--border-color)] sticky top-[57px] h-[calc(100vh-57px)] overflow-y-auto custom-scroll z-30 p-3.5 space-y-3.5">
+      
+      <div class="flex items-center justify-between pb-2 border-b border-[var(--border-color)]">
+        <div>
+          <span class="text-[9px] uppercase font-mono font-bold tracking-wider text-[var(--text-muted)] block">Navegação</span>
+          <h2 class="text-xs font-bold font-serif text-[var(--accent-primary)]">Índice do Painel</h2>
+        </div>
+        <button onclick="toggleNavSidebar(false)" class="p-1 rounded-lg hover:bg-[var(--bg-card-subtle)] text-[var(--text-muted)] transition" title="Ocultar índice">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+      </div>
+
+      <!-- Links com badges de status de validação -->
+      <nav class="space-y-1 text-xs">
+        <a href="#hero-visao" class="flex items-center justify-between px-2.5 py-2 rounded-xl hover:bg-[var(--bg-card-subtle)] text-[var(--text-main)] transition">
+          <span class="flex items-center gap-2"><span>📌</span><span class="font-medium">1. Visão Executiva</span></span>
+          <span class="text-[9px] text-[var(--text-muted)] font-mono">Início</span>
+        </a>
+        <a href="#secao-instrucoes" class="flex items-center justify-between px-2.5 py-2 rounded-xl hover:bg-[var(--bg-card-subtle)] text-[var(--text-main)] transition">
+          <span class="flex items-center gap-2"><span>📘</span><span class="font-medium">2. Instruções de Uso</span></span>
+          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-sky-100 text-sky-800 font-semibold">Guia</span>
+        </a>
+        <a href="#secao-diagnostico" class="flex items-center justify-between px-2.5 py-2 rounded-xl hover:bg-[var(--bg-card-subtle)] text-[var(--text-main)] transition">
+          <span class="flex items-center gap-2"><span>🏛️</span><span class="font-medium">3. Diagnóstico RRYI</span></span>
+          <span id="navBadgePonto1" class="text-[9px] font-mono px-1.5 py-0.5 rounded-full card-subtle text-[var(--text-muted)]">Pendente</span>
+        </a>
+        <a href="#secao-opcoes" class="flex items-center justify-between px-2.5 py-2 rounded-xl hover:bg-[var(--bg-card-subtle)] text-[var(--text-main)] transition">
+          <span class="flex items-center gap-2"><span>⚖️</span><span class="font-medium">4. Opções (€)</span></span>
+          <span id="navBadgeOption" class="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold">Opção 2</span>
+        </a>
+        <a href="#secao-economicidade" class="flex items-center justify-between px-2.5 py-2 rounded-xl hover:bg-[var(--bg-card-subtle)] text-[var(--text-main)] transition">
+          <span class="flex items-center gap-2"><span>💡</span><span class="font-medium">5. IA &amp; Economicidade</span></span>
+          <span id="navBadgePonto3" class="text-[9px] font-mono px-1.5 py-0.5 rounded-full card-subtle text-[var(--text-muted)]">Pendente</span>
+        </a>
+        <a href="#secao-blindagem" class="flex items-center justify-between px-2.5 py-2 rounded-xl hover:bg-[var(--bg-card-subtle)] text-[var(--text-main)] transition">
+          <span class="flex items-center gap-2"><span>🛡️</span><span class="font-medium">6. Salvaguarda &amp; Faturas</span></span>
+          <span id="navBadgePonto4" class="text-[9px] font-mono px-1.5 py-0.5 rounded-full card-subtle text-[var(--text-muted)]">0/4</span>
+        </a>
+        <a href="#secao-deliberacao" class="flex items-center justify-between px-2.5 py-2 rounded-xl hover:bg-[var(--bg-card-subtle)] text-[var(--text-main)] transition">
+          <span class="flex items-center gap-2"><span>✍️</span><span class="font-medium">7. Assinatura Digital</span></span>
+          <span class="text-[9px] font-mono text-[var(--accent-soft)]">Protocolo</span>
+        </a>
+      </nav>
+
+      <!-- Cartão Parâmetros Contratuais -->
+      <div class="pt-2.5 border-t border-[var(--border-color)] text-[11px] space-y-1.5 card-subtle p-3 rounded-2xl">
+        <span class="text-[9px] uppercase font-mono font-bold tracking-wider text-[var(--accent-primary)] block">Contrato Erasmus+</span>
+        <div class="flex justify-between items-center text-[var(--text-muted)]">
+          <span>Subvenção Total:</span>
+          <strong class="font-mono text-[var(--text-main)]">60.000 €</strong>
+        </div>
+        <div class="flex justify-between items-center text-[var(--text-muted)]">
+          <span>Subcontratação TI:</span>
+          <strong class="font-mono text-[var(--accent-primary)]">~12k a 16k €</strong>
+        </div>
+        <div class="flex justify-between items-center text-[var(--text-muted)]">
+          <span>Domínio/Acessos:</span>
+          <strong class="text-emerald-700 font-semibold">100% Vistara</strong>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ============================================================ -->
+    <!-- 2. COLUNA CENTRAL: CONTEÚDO COM INDEPENDÊNCIA DE ZOOM         -->
+    <!-- ============================================================ -->
+    <main id="centerColumn" class="flex-1 min-w-0 px-4 sm:px-7 py-6 overflow-y-auto custom-scroll h-[calc(100vh-57px)]">
+      
+      <!-- Container escalonável pelo controle de zoom -->
+      <div id="scalableContent" class="space-y-6 max-w-3xl mx-auto origin-top transition-transform">
+
+        <!-- HERO CARD RESUMIDO (id: hero-visao) -->
+        <section id="hero-visao" class="card-surface rounded-3xl p-6 sm:p-7 space-y-3 scroll-mt-20">
+          <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-3 border-b border-[var(--border-color)]">
+            <div>
+              <span class="text-[10px] font-mono uppercase tracking-wider text-[var(--accent-soft)] font-bold">Consórcio Internacional Portugal · Turquia</span>
+              <h2 class="text-xl sm:text-2xl font-serif font-bold text-[var(--accent-primary)] mt-0.5">Levantamento Estratégico &amp; Governança do Hub YOGANET</h2>
+            </div>
+            <div class="px-3.5 py-1.5 rounded-xl card-subtle text-xs font-mono">
+              Piloto Homologado: <strong class="text-[var(--accent-primary)]">31 Jan 2027</strong>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+            Foi realizado o levantamento técnico comparativo entre o mercado dos EUA, da Europa e a nossa capacidade com visão estratégica, governança e tecnologia embarcada para fundamentar as deliberações do consórcio (Espaço Vistara, AMYD e Turquia). O objetivo é atender integralmente aos critérios do contrato europeu (<code class="text-[11px] px-1 py-0.5 rounded card-subtle">07 - Hub Briefing</code>), integrando com harmonia o trabalho institucional já iniciado e assegurando a aprovação integral dos 100 pontos da subvenção europeia com transparência, economicidade e sustentabilidade operacional.
+          </p>
+
+          <!-- ALERTA DE MERCADO: FORNECEDOR EXTERNO VS. NOSSA SOLUÇÃO -->
+          <div class="mt-2.5 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-[var(--text-main)] space-y-1">
+            <div class="flex items-center gap-2 font-bold text-amber-900">
+              <span>⚠️</span> Risco de Orçamento com Terceiros nos EUA ou Europa:
+            </div>
+            <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+              Se o parceiro nos EUA for orçar esse desenvolvimento do zero, ele provavelmente vai pedir <strong>mais de 20 mil dólares</strong>, o que pode inviabilizar o projeto ou estourar a verba do consórcio. Além disso, uma equipe de fora pode não dominar a economicidade que realizamos e os critérios finos da auditoria Erasmus+, com o risco de cobrarem por cada alteração ou ajuste de conformidade.
+            </p>
+          </div>
+        </section>
+
+        <!-- GUIA DE USO & INSTRUÇÕES DE DELIBERAÇÃO (id: secao-instrucoes) -->
+        <section id="secao-instrucoes" class="card-surface rounded-3xl p-5 sm:p-6 space-y-3.5 border border-sky-500/30 bg-gradient-to-br from-[var(--bg-surface)] to-sky-500/5 scroll-mt-20">
+          <div class="flex items-center justify-between pb-2 border-b border-[var(--border-color)]">
+            <div class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-lg bg-sky-700 text-white flex items-center justify-center font-bold text-xs">ℹ️</span>
+              <h3 class="font-serif text-base font-bold text-[var(--accent-primary)]">Como Funciona este Painel de Deliberação (Guia Passo a Passo)</h3>
+            </div>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-sky-100 text-sky-900 font-semibold">INSTRUÇÕES</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            
+            <div class="p-3.5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-1">
+              <div class="flex items-center gap-2 font-bold text-[var(--accent-primary)]">
+                <span class="w-4 h-4 rounded-full bg-[var(--accent-primary)] text-white text-[10px] flex items-center justify-center">1</span>
+                <span>Navegação &amp; Triangulação</span>
+              </div>
+              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+                Utilize o menu à esquerda para navegar pelas seções. O <strong>Quadro de Consenso</strong> à direita acompanha sua leitura ao vivo. Clicar em qualquer cartão da direita rola a tela direto para o item correspondente.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-1">
+              <div class="flex items-center gap-2 font-bold text-[var(--accent-primary)]">
+                <span class="w-4 h-4 rounded-full bg-[var(--accent-primary)] text-white text-[10px] flex items-center justify-center">2</span>
+                <span>Validação Ponto a Ponto</span>
+              </div>
+              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+                Ao ler cada ponto estratégico, marque a caixa de concordância. O painel à direita acenderá em verde instantaneamente, atualizando o progresso de alinhamento do consórcio.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-1">
+              <div class="flex items-center gap-2 font-bold text-[var(--accent-primary)]">
+                <span class="w-4 h-4 rounded-full bg-[var(--accent-primary)] text-white text-[10px] flex items-center justify-center">3</span>
+                <span>Salvamento Automático (Pausa Segura)</span>
+              </div>
+              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+                O painel salva todas as suas escolhas e textos continuamente no seu navegador. Se precisar interromper para almoçar ou ir a uma reunião, pode fechar a janela: ao reabrir, seus dados estarão intactos.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-color)] space-y-1">
+              <div class="flex items-center gap-2 font-bold text-[var(--accent-primary)]">
+                <span class="w-4 h-4 rounded-full bg-[var(--accent-primary)] text-white text-[10px] flex items-center justify-center">4</span>
+                <span>Registro, Dúvidas &amp; Exportação</span>
+              </div>
+              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+                Na última seção, preencha seus dados e registre eventuais dúvidas. Ao autenticar, você pode baixar o <strong>Protocolo .JSON</strong>, exportar a planilha <strong>.CSV</strong> ou editar seus dados a qualquer momento na tabela consolidada.
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SEÇÃO 1: DIAGNÓSTICO INSTITUCIONAL (id: secao-diagnostico) -->
+        <section id="secao-diagnostico" class="card-surface rounded-3xl p-6 space-y-4 scroll-mt-20">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-lg bg-[var(--accent-primary)] text-white flex items-center justify-center font-bold text-xs">1</span>
+              <h3 class="font-serif text-base sm:text-lg font-bold text-[var(--accent-primary)]">O Sistema Atual no rryi.org &amp; Os Requisitos da União Europeia</h3>
+            </div>
+            <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full card-subtle font-semibold text-[var(--accent-soft)]">DIAGNÓSTICO</span>
+          </div>
+
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            A iniciativa visual iniciada no portal institucional forneceu uma base pública relevante. Contudo, perante as exigências do contrato europeu de formação profissional (VET), há 4 alinhamentos regulatórios obrigatórios que a Agência Nacional auditará:
+          </p>
+
+          <!-- ACORDEON EXPANSÍVEL (ANTI-FADIGA) -->
+          <details class="group rounded-2xl card-subtle transition">
+            <summary class="flex items-center justify-between p-4 font-semibold text-xs text-[var(--text-main)]">
+              <span class="flex items-center gap-2">
+                <span>🔍</span> Clique para expandir os 4 pontos críticos identificados no site atual vs. a exigência europeia
+              </span>
+              <span class="accordion-icon transition-transform duration-200 text-xs">▼</span>
+            </summary>
+            <div class="p-4 pt-1 text-xs text-[var(--text-muted)] border-t border-[var(--border-color)] space-y-3">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-3 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-color)] space-y-1.5">
+                  <strong class="text-[var(--accent-soft)] block text-xs">Cenário Atual no rryi.org:</strong>
+                  <ul class="space-y-1 list-disc pl-4 text-[11px]">
+                    <li>Apresenta-se como órgão de linhagem específico, sem exibir a marca oficial e obrigatória <strong>YOGANET</strong>.</li>
+                    <li>Link da Política de Privacidade gera <strong>Erro 404</strong> durante o formulário de cadastro.</li>
+                    <li>Fluxo de pré-registo encaminhado para bot externo no Telegram, sem log auditável perante a UE.</li>
+                    <li>Cursos sem a matriz de competências do Quadro Europeu de Qualificações (EQF Nível 4).</li>
+                  </ul>
+                </div>
+                <div class="p-3 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-color)] space-y-1.5">
+                  <strong class="text-[var(--accent-primary)] block text-xs">Exigência do Contrato Erasmus+ (07 - Hub Briefing):</strong>
+                  <ul class="space-y-1 list-disc pl-4 text-[11px]">
+                    <li>Identidade clara do Hub YOGANET com emblema oficial e disclaimer legal da União Europeia.</li>
+                    <li>Conformidade estrita de RGPD com registro seguro de consentimento e área rural/ilha.</li>
+                    <li>Registro e progresso do aluno integrados diretamente na plataforma do consórcio (sem canais externos).</li>
+                    <li><strong>10 cursos de formação profissional</strong> e certificados digitais com validação criptográfica por QR Code.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <!-- CHECK DE VALIDAÇÃO DO PONTO 1 (INTERATIVO) -->
+          <div class="pt-2">
+            <label class="flex items-center gap-3 p-3.5 rounded-2xl bg-[var(--bg-card-subtle)] hover:bg-opacity-90 border border-[var(--border-color)] transition cursor-pointer">
+              <input type="checkbox" id="chkPonto1" onchange="syncAgreements()" class="w-5 h-5 text-[var(--accent-primary)] rounded transition">
+              <div class="text-xs">
+                <strong class="text-[var(--text-main)] block">Concordar com o saneamento dos 4 passivos regulatórios da UE</strong>
+                <span class="text-[11px] text-[var(--text-muted)]">Adequação da marca YOGANET, correção do RGPD 404, cadastro nativo auditável e matriz EQF Nível 4.</span>
+              </div>
+            </label>
+          </div>
+        </section>
+
+        <!-- SEÇÃO 2: AS DUAS OPÇÕES DE DECISÃO (APENAS EM EUROS) -->
+        <section id="secao-opcoes" class="space-y-4 scroll-mt-20">
+          <div class="flex items-center gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-[var(--accent-primary)] text-white flex items-center justify-center font-bold text-xs">2</span>
+            <div>
+              <h3 class="font-serif text-lg sm:text-xl font-bold text-[var(--accent-primary)]">Deliberação das Duas Opções de Implementação</h3>
+              <p class="text-xs text-[var(--text-muted)]">Espremendo o orçamento para garantir máxima eficiência, sustentabilidade e blindagem para o consórcio:</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+            
+            <!-- OPÇÃO 1: COMPARTILHADA -->
+            <div class="card-surface rounded-3xl p-5 space-y-3.5 relative border-2 border-transparent hover:border-[var(--accent-soft)] transition cursor-pointer" onclick="selectOption('opcao1')">
+              <div class="flex justify-between items-start">
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full card-subtle text-[var(--accent-primary)]">OPÇÃO 1 · COMPARTILHADA</span>
+                <input type="radio" name="optConsorcio" id="radioOpt1" value="8900" onchange="syncAgreements()" class="w-4 h-4 text-[var(--accent-primary)]">
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-[var(--accent-primary)] font-serif">Duas Frentes: Preservação do Design da RRYI</h4>
+                <div class="text-xl font-bold text-[var(--accent-primary)] font-serif mt-0.5">8.900 €</div>
+                <p class="text-[10px] text-[var(--accent-soft)] font-medium">Distribuído suavemente em 7 parcelas mensais (~ 1.270 €/mês)</p>
+              </div>
+              
+              <ul class="text-xs text-[var(--text-muted)] space-y-1.5 border-t border-[var(--border-color)] pt-2.5">
+                <li class="flex items-start gap-1.5">
+                  <span class="text-emerald-700 font-bold">✓</span>
+                  <span><strong>Parceiro nos EUA:</strong> mantém a frente visual e institucional pública do site que já iniciou.</span>
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <span class="text-emerald-700 font-bold">✓</span>
+                  <span><strong>Core Engine da FNW:</strong> LMS, certificação QR Code e conformidade legal da UE.</span>
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <span class="text-emerald-700 font-bold">✓</span>
+                  <span><strong>Produção dos 10 Cursos dos Dadas com IA:</strong> aulas e quizzes sem estúdio presencial.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- OPÇÃO 2: TURNKEY COMPLETA -->
+            <div class="card-surface rounded-3xl p-5 space-y-3.5 relative border-2 border-[var(--accent-primary)] transition cursor-pointer" onclick="selectOption('opcao2')">
+              <div class="flex justify-between items-start">
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-[var(--accent-primary)] text-white">OPÇÃO 2 · SOBERANA (RECOMENDADA)</span>
+                <input type="radio" name="optConsorcio" id="radioOpt2" value="11900" onchange="syncAgreements()" class="w-4 h-4 text-[var(--accent-primary)]" checked>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-[var(--accent-primary)] font-serif">Solução Completa Turnkey &amp; Soberana (FNW)</h4>
+                <div class="text-xl font-bold text-[var(--accent-primary)] font-serif mt-0.5">11.900 €</div>
+                <p class="text-[10px] text-[var(--accent-primary)] font-medium">Distribuído suavemente em 7 parcelas mensais (~ 1.700 €/mês)</p>
+              </div>
+
+              <ul class="text-xs text-[var(--text-muted)] space-y-1.5 border-t border-[var(--border-color)] pt-2.5">
+                <li class="flex items-start gap-1.5">
+                  <span class="text-emerald-700 font-bold">✓</span>
+                  <span><strong>Entrega 100% Soberana de Ponta a Ponta:</strong> front-end, LMS e repositório aberto unificados.</span>
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <span class="text-emerald-700 font-bold">✓</span>
+                  <span><strong>Garantia de 100 Pontos na Auditoria:</strong> painel da UE com exportação em 1 clique das evidências.</span>
+                </li>
+                <li class="flex items-start gap-1.5">
+                  <span class="text-emerald-700 font-bold">✓</span>
+                  <span><strong>Produção Completa dos 10 Cursos em IA:</strong> aulas completas com voz autorizada e quizzes.</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SEÇÃO 3: ECONOMICIDADE COM IA (id: secao-economicidade) -->
+        <section id="secao-economicidade" class="card-surface rounded-3xl p-6 space-y-3.5 scroll-mt-20">
+          <div class="flex items-center gap-2.5">
+            <span class="w-6 h-6 rounded-lg bg-[var(--accent-soft)] text-white flex items-center justify-center font-bold text-xs">3</span>
+            <h3 class="font-serif text-base sm:text-lg font-bold text-[var(--accent-primary)]">Essa Proposta se Paga Sozinha: Economicidade com IA Generativa</h3>
+          </div>
+          
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            Só o que o consórcio vai economizar ao <strong>não precisar pagar passagens aéreas internacionais, estúdios e diárias</strong> para os Dadas gravarem presencialmente já cobre o valor da plataforma duas vezes.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs pt-1">
+            <div class="p-3.5 rounded-2xl card-subtle space-y-1">
+              <strong class="text-[var(--accent-primary)] block text-xs">1. Amostras Autorizadas</strong>
+              <p class="text-[11px] text-[var(--text-muted)]">Amostras autorizadas de áudio e imagem para clonar a voz dos Dadas com total fidelidade ética.</p>
+            </div>
+            <div class="p-3.5 rounded-2xl card-subtle space-y-1">
+              <strong class="text-[var(--accent-soft)] block text-xs">2. Esteira Neural FNW</strong>
+              <p class="text-[11px] text-[var(--text-muted)]">Videoaulas em alta resolução com cadência didática, termos sânscritos precisos e zero viagens.</p>
+            </div>
+            <div class="p-3.5 rounded-2xl card-subtle space-y-1">
+              <strong class="text-[var(--accent-primary)] block text-xs">3. 10 Cursos em Semanas</strong>
+              <p class="text-[11px] text-[var(--text-muted)]">Slides conceituais dinâmicos e questionários pedagógicos automatizados com padrão impecável.</p>
+            </div>
+          </div>
+
+          <!-- CHECK DE VALIDAÇÃO DO PONTO 3 -->
+          <div class="pt-2">
+            <label class="flex items-center gap-3 p-3.5 rounded-2xl bg-[var(--bg-card-subtle)] hover:bg-opacity-90 border border-[var(--border-color)] transition cursor-pointer">
+              <input type="checkbox" id="chkPonto3" onchange="syncAgreements()" class="w-5 h-5 text-[var(--accent-primary)] rounded transition">
+              <div class="text-xs">
+                <strong class="text-[var(--text-main)] block">Aprovar a produção dos 10 cursos com IA Generativa e clonagem de voz autorizada</strong>
+                <span class="text-[11px] text-[var(--text-muted)]">Reconhecer que a economia em passagens aéreas e diárias cobre a infraestrutura e assegura os prazos da UE.</span>
+              </div>
+            </label>
+          </div>
+        </section>
+
+        <!-- SEÇÃO 4: SALVAGUARDA INSTITUCIONAL & AUDITORIA DA UNIÃO EUROPEIA -->
+        <section id="secao-blindagem" class="card-surface rounded-3xl p-6 space-y-4 scroll-mt-20">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-lg bg-[var(--accent-primary)] text-white flex items-center justify-center font-bold text-xs">4</span>
+              <h3 class="font-serif text-base sm:text-lg font-bold text-[var(--accent-primary)]">Salvaguarda Institucional, Fluxo Suave &amp; Patrimônio do Espaço Vistara</h3>
+            </div>
+            <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full card-subtle font-semibold text-[var(--accent-soft)]">TRANQUILIDADE UE</span>
+          </div>
+
+          <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+            Para a tranquilidade de todos perante a auditoria da Agência Nacional e da Comissão Europeia, estruturamos os 4 pilares contratuais de conformidade:
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs">
+            
+            <!-- Pilar 4.1: Emissão de Faturas Legais -->
+            <label class="p-3.5 rounded-2xl card-subtle space-y-1.5 cursor-pointer hover:bg-opacity-90 border border-[var(--border-color)] transition block">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2 text-[var(--accent-primary)] font-bold">
+                  <span>📑</span> Faturas de Exportação
+                </div>
+                <input type="checkbox" id="chkPonto4_1" onchange="syncAgreements()" class="w-4 h-4 text-[var(--accent-primary)] rounded">
+              </div>
+              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+                Empresa formal de tecnologia e IA habilitada para contrato internacional de subcontratação e emissão de faturas legais de exportação para a Vistara.
+              </p>
+            </label>
+
+            <!-- Pilar 4.2: Fluxo Suave em 7 Parcelas -->
+            <label class="p-3.5 rounded-2xl card-subtle space-y-1.5 cursor-pointer hover:bg-opacity-90 border border-[var(--border-color)] transition block">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2 text-[var(--accent-primary)] font-bold">
+                  <span>🗓️</span> Fluxo Suave (7 Meses)
+                </div>
+                <input type="checkbox" id="chkPonto4_2" onchange="syncAgreements()" class="w-4 h-4 text-[var(--accent-primary)] rounded">
+              </div>
+              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+                Valor diluído ao longo dos 7 meses de projeto (Dezembro/2026 a Junho/2027), acompanhando os marcos oficiais da subvenção europeia.
+              </p>
+            </label>
+
+            <!-- Pilar 4.3: Soberania da Vistara (Artigo 20) -->
+            <label class="p-3.5 rounded-2xl card-subtle space-y-1.5 cursor-pointer hover:bg-opacity-90 border border-[var(--border-color)] transition block">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2 text-[var(--accent-primary)] font-bold">
+                  <span>🏛️</span> Soberania (Artigo 20)
+                </div>
+                <input type="checkbox" id="chkPonto4_3" onchange="syncAgreements()" class="w-4 h-4 text-[var(--accent-primary)] rounded">
+              </div>
+              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+                Domínio e acessos mestres ficam 100% no nome do Espaço Vistara, assegurando plena autonomia, transparência e governança institucional ao Espaço Vistara perante terceiros.
+              </p>
+            </label>
+
+            <!-- Pilar 4.4: Ativo Comercial Perpétuo -->
+            <label class="p-3.5 rounded-2xl card-subtle space-y-1.5 cursor-pointer hover:bg-opacity-90 border border-[var(--border-color)] transition block">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2 text-emerald-800 font-bold">
+                  <span>🚀</span> Ativo Comercial Perpétuo
+                </div>
+                <input type="checkbox" id="chkPonto4_4" onchange="syncAgreements()" class="w-4 h-4 text-[var(--accent-primary)] rounded">
+              </div>
+              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+                O contrato europeu prevê que a plataforma continua ativa para exploração comercial. A Vistara fica com ativo próprio de cursos e assinaturas para faturar no futuro.
+              </p>
+            </label>
+
+          </div>
+
+          <!-- ADVISE TÉCNICO: PROVISIONAMENTO DE HARDWARE (LOCAÇÃO VS. COMPRA) -->
+          <div class="p-4 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-xs space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2 font-bold text-sky-950">
+                <span>💻</span>
+                <span>Advise Técnico de Governança: Estações de Trabalho (Locação vs. Compra)</span>
+              </div>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-sky-200 text-sky-900 font-semibold">RECOMENDAÇÃO OFICIAL</span>
+            </div>
+            <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
+              <strong>Alerta de Conformidade Financeira da UE:</strong> A aquisição de computadores novos submete a entidade à <em>Regra de Depreciação Proporcional do Erasmus+</em> (onde apenas ~20% do valor da nota é elegível nos 7 meses, forçando a Vistara a cobrir o restante com recursos próprios). Além disso, panes de hardware em ambiente insular (Açores) geram paralisações de semanas para reparos no continente.
+            </p>
+            <div class="p-3 bg-[var(--bg-surface)] rounded-xl border border-[var(--border-color)] text-[11px] text-[var(--text-main)] space-y-1">
+              <strong class="text-[var(--accent-primary)] block">Solução de Engenharia Recomendada:</strong>
+              <span>Provisionamento de estações corporativas via <strong>Locação com SLA de Substituição Imediata</strong>. O custo é 100% elegível como despesa operacional direta mensal (OPEX), usufrui do IVA reduzido dos Açores (16%) e pode ser gerido e faturado diretamente dentro da nossa rubrica unificada de tecnologia internacional.</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- SEÇÃO 5: ASSINATURA & REGISTRO DIGITAL (id: secao-deliberacao) -->
+        <section id="secao-deliberacao" class="card-surface rounded-3xl p-6 space-y-4 border-2 border-[var(--accent-primary)] scroll-mt-20">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-lg bg-[var(--accent-primary)] text-white flex items-center justify-center font-bold text-xs">✍️</span>
+              <div>
+                <h3 class="font-serif text-base sm:text-lg font-bold text-[var(--accent-primary)]">Protocolo Formal de Deliberação do Consórcio</h3>
+                <p class="text-xs text-[var(--text-muted)]">Assinatura digital e registro auditável com salvamento contínuo no navegador.</p>
+              </div>
+            </div>
+            
+            <!-- Indicador de Salvamento Automático -->
+            <div class="flex items-center gap-2">
+              <span id="draftSaveIndicator" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[10px]">
+                <span>💾</span> Rascunho ativo
+              </span>
+              <button type="button" onclick="clearDraft()" class="text-[10px] text-gray-400 hover:text-red-600 transition font-mono" title="Limpar formulário e rascunho">
+                Limpar
+              </button>
+            </div>
+          </div>
+
+          <!-- Banner de Modo de Edição Ativo (Oculto por Padrão) -->
+          <div id="editModeBanner" class="hidden p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between text-xs text-amber-950">
+            <div class="flex items-center gap-2 font-semibold">
+              <span>✏️</span>
+              <span>Modo de Edição: Atualizando registro existente na base consolidada.</span>
+            </div>
+            <button type="button" onclick="cancelEditingMode()" class="px-2 py-0.5 rounded-lg bg-amber-200 text-amber-900 font-mono text-[10px] hover:bg-amber-300">
+              Cancelar Edição
+            </button>
+          </div>
+
+          <form id="formSignOff" onsubmit="handleSignOff(event)" class="space-y-3.5 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label class="block font-semibold text-[var(--text-main)] mb-1">Representante Legal:</label>
+                <input type="text" id="signerName" oninput="triggerAutoSaveDraft()" required placeholder="Ex: Dra. Marcela de Marco Sobral (PhD)" class="w-full px-3.5 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-canvas)] focus:bg-white outline-none">
+              </div>
+              <div>
+                <label class="block font-semibold text-[var(--text-main)] mb-1">Entidade / Organização:</label>
+                <select id="signerOrg" onchange="triggerAutoSaveDraft()" required class="w-full px-3.5 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-canvas)] focus:bg-white outline-none">
+                  <option value="Espaço Vistara (Portugal - Coordenador)">Espaço Vistara (Portugal · Coordenador)</option>
+                  <option value="AMYD (Turquia - Parceiro)">AMYD (Turquia · Parceiro)</option>
+                  <option value="Conselho Técnico / Consórcio">Conselho Técnico / Consórcio</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div>
+                <label class="block font-semibold text-[var(--text-main)] mb-1">Opção Selecionada no Acordo:</label>
+                <input type="text" id="chosenOption" readonly value="Opção 2 (Turnkey Soberana: 11.900 €)" class="w-full px-3.5 py-2.5 rounded-xl border border-[var(--border-color)] card-subtle font-bold text-[var(--accent-primary)] outline-none">
+              </div>
+              <div>
+                <label class="block font-semibold text-[var(--text-main)] mb-1">E-mail Institucional:</label>
+                <input type="email" id="signerEmail" oninput="triggerAutoSaveDraft()" required placeholder="Ex: contato@vistara.pt" class="w-full px-3.5 py-2.5 rounded-xl border border-[var(--border-color)] bg-[var(--bg-canvas)] focus:bg-white outline-none">
+              </div>
+            </div>
+
+            <!-- CAMPO PARA DÚVIDAS, OBSERVAÇÕES OU SOLICITAÇÕES DO CONSÓRCIO -->
+            <div>
+              <label class="block font-semibold text-[var(--text-main)] mb-1">Dúvidas, Observações ou Solicitações de Ajuste (Opcional):</label>
+              <textarea id="signerNotes" oninput="triggerAutoSaveDraft()" rows="2" placeholder="Caso você tenha alguma dúvida técnica, observação pedagógica ou consideração para a coordenação do consórcio, descreva aqui..." class="w-full px-3.5 py-2 rounded-xl border border-[var(--border-color)] bg-[var(--bg-canvas)] focus:bg-white outline-none text-xs"></textarea>
+            </div>
+
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div class="text-[11px] text-[var(--text-muted)]">
+                🔒 Registro auditável com geração de arquivo JSON e espelho para planilha.
+              </div>
+              <button type="submit" id="btnSubmit" class="w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-white bg-[var(--accent-primary)] hover:opacity-90 transition shadow-sm flex items-center justify-center gap-2">
+                <span id="btnSubmitIcon">✍️</span> <span id="btnSubmitText">Autenticar &amp; Salvar Deliberação</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Feedback de Confirmação & Central de Exportação -->
+          <div id="confirmBox" class="hidden p-5 rounded-2xl bg-emerald-50 border border-emerald-300 text-emerald-900 space-y-3 text-xs">
+            <div class="flex items-center gap-2 font-bold text-sm">
+              <span>✅</span> Deliberação Formal Registrada com Sucesso na Base de Governança!
+            </div>
+            <div id="confirmSummary" class="text-[11px] leading-relaxed"></div>
+            <div id="confirmNotesDisplay" class="text-[11px] text-gray-700 italic border-l-2 border-emerald-600 pl-2.5"></div>
+            <div id="confirmItemsList" class="p-3 bg-white rounded-xl border border-emerald-200 text-[11px] space-y-1"></div>
+            <div class="text-[10px] font-mono text-emerald-700" id="confirmTimestamp"></div>
+
+            <!-- BOTÕES DE EXPORTAÇÃO E TRANSMISSÃO DO PROTOCOLO -->
+            <div class="pt-2 flex flex-wrap items-center gap-2 border-t border-emerald-200">
+              <button onclick="downloadLatestJSON()" class="px-3 py-1.5 rounded-xl bg-emerald-700 text-white font-semibold hover:bg-emerald-800 transition flex items-center gap-1.5 text-xs shadow-xs" title="Baixar arquivo JSON oficial para auditoria">
+                <span>📥</span> Baixar Protocolo (.JSON)
+              </button>
+              <button onclick="reopenForEditing()" class="px-3 py-1.5 rounded-xl bg-amber-600 text-white font-semibold hover:bg-amber-700 transition flex items-center gap-1.5 text-xs shadow-xs" title="Continuar ajustando os dados desta deliberação">
+                <span>✏️</span> Continuar Editando
+              </button>
+              <button onclick="copyDeliberationToClipboard()" class="px-3 py-1.5 rounded-xl bg-white border border-emerald-300 text-emerald-900 font-semibold hover:bg-emerald-100 transition flex items-center gap-1.5 text-xs">
+                <span>📋</span> Copiar para WhatsApp / E-mail
+              </button>
+              <button onclick="exportDeliberationsToCSV()" class="px-3 py-1.5 rounded-xl bg-white border border-emerald-300 text-emerald-900 font-semibold hover:bg-emerald-100 transition flex items-center gap-1.5 text-xs">
+                <span>📊</span> Exportar para Planilha (.CSV)
+              </button>
+            </div>
+          </div>
+
+          <!-- TABELA DE DELIBERAÇÕES REGISTRADAS (HISTÓRICO AUDITÁVEL DO CONSÓRCIO) -->
+          <div class="pt-4 border-t border-[var(--border-color)] space-y-2.5">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="text-xs font-bold text-[var(--text-main)] uppercase tracking-wider font-mono">Base Consolidada de Deliberações do Consórcio</h4>
+                <p class="text-[10px] text-[var(--text-muted)]">Histórico persistido no navegador. Cada registro pode ser editado, exportado em JSON ou CSV.</p>
+              </div>
+              <button onclick="exportDeliberationsToCSV()" class="px-2.5 py-1 rounded-lg card-subtle text-[11px] font-mono text-[var(--accent-primary)] hover:bg-white border border-[var(--border-color)] font-semibold transition">
+                📊 Baixar Planilha (.CSV)
+              </button>
+            </div>
+            
+            <div class="overflow-x-auto rounded-xl border border-[var(--border-color)] card-subtle">
+              <table class="w-full text-left text-[11px]">
+                <thead class="bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono text-[10px] uppercase border-b border-[var(--border-color)]">
+                  <tr>
+                    <th class="p-2.5">Data / Hora</th>
+                    <th class="p-2.5">Representante</th>
+                    <th class="p-2.5">Entidade</th>
+                    <th class="p-2.5">Opção (€)</th>
+                    <th class="p-2.5">Validações</th>
+                    <th class="p-2.5">Dúvidas / Notas</th>
+                    <th class="p-2.5 text-center">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="registryTableBody" class="divide-y divide-[var(--border-color)] bg-[var(--bg-surface)]">
+                  <tr>
+                    <td colspan="7" class="p-3 text-center text-[var(--text-muted)] italic">Nenhuma deliberação registrada nesta sessão ainda.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- 3. COLUNA DIREITA: QUADRO DINÂMICO DE CONSENSO (ACOMPANHAMENTO) -->
+    <!-- ============================================================ -->
+    <aside id="consensusSidebar" class="w-80 lg:w-96 flex-shrink-0 card-surface border-l border-[var(--border-color)] sticky top-[57px] h-[calc(100vh-57px)] overflow-y-auto custom-scroll z-30 p-4 space-y-3.5 transition-all">
+      
+      <!-- Topo do Painel de Consenso -->
+      <div class="flex items-center justify-between pb-2.5 border-b border-[var(--border-color)]">
+        <div class="flex items-center gap-2">
+          <span class="text-base">📋</span>
+          <div>
+            <h3 class="text-xs font-bold font-serif text-[var(--accent-primary)]">Quadro de Consenso</h3>
+            <span class="text-[10px] text-[var(--text-muted)] font-mono">Espelho Dinâmico</span>
+          </div>
+        </div>
+        
+        <!-- Botão Esticar / Encolher Largura + Fechar -->
+        <div class="flex items-center gap-1">
+          <button id="btnStretchConsensus" onclick="toggleConsensusWidth()" class="p-1.5 rounded-lg card-subtle hover:bg-white text-[var(--text-muted)] hover:text-[var(--text-main)] transition" title="Esticar / Ajustar Largura do Painel">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+          </button>
+          <button onclick="toggleConsensusSidebar(false)" class="p-1.5 rounded-lg card-subtle hover:bg-white text-[var(--text-muted)] hover:text-[var(--text-main)] transition" title="Ocultar Painel">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Barra de Progresso Viva -->
+      <div class="space-y-1">
+        <div class="flex justify-between items-center text-[11px] font-mono">
+          <span class="text-[var(--text-muted)]">Consenso Geral:</span>
+          <span id="rightProgressPercent" class="font-bold text-[var(--accent-primary)]">14% (1/7)</span>
+        </div>
+        <div class="w-full h-2 rounded-full card-subtle overflow-hidden">
+          <div id="rightProgressBar" class="h-full bg-emerald-600 rounded-full transition-all duration-300" style="width: 14%;"></div>
+        </div>
+      </div>
+
+      <!-- Botões de Ação Rápida de Validação -->
+      <div class="flex items-center gap-1.5">
+        <button onclick="checkAllAgreements(true)" class="flex-1 py-1.5 px-2 rounded-xl bg-[var(--accent-primary)] text-white text-[11px] font-semibold hover:opacity-90 transition">
+          ✓ Validar Todos (7/7)
+        </button>
+        <button onclick="checkAllAgreements(false)" class="py-1.5 px-2 rounded-xl card-subtle text-[var(--text-muted)] hover:text-[var(--text-main)] text-[11px] font-medium transition">
+          Limpar
+        </button>
+      </div>
+
+      <!-- Feed Dinâmico dos 7 Pontos (Atualizado ao Vivo) -->
+      <div id="rightAgreementsFeed" class="space-y-2 text-xs pt-1">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+
+      <!-- Botão Rápido de Salto para Assinatura -->
+      <div class="pt-3 border-t border-[var(--border-color)]">
+        <a href="#secao-deliberacao" class="w-full py-2.5 px-3 rounded-xl bg-emerald-800 text-white font-bold text-xs flex items-center justify-center gap-2 hover:bg-emerald-900 transition shadow-xs">
+          <span>✍️</span> Ir para Assinatura do Protocolo
+        </a>
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- JAVASCRIPT DE SINCRONIZAÇÃO, ZOOM E COCKPIT 3 COLUNAS          -->
+  <!-- ============================================================== -->
+  <script>
+    // Gerenciamento de Tema Pastel
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('yoganet_theme', theme);
+      closePaletteMenu();
+    }
+
+    const savedTheme = localStorage.getItem('yoganet_theme') || 'sand';
+    setTheme(savedTheme);
+
+    function togglePaletteMenu() {
+      const drop = document.getElementById('paletteDropdown');
+      const isHidden = drop.classList.contains('hidden');
+      if (isHidden) {
+        drop.classList.remove('hidden');
+      } else {
+        closePaletteMenu();
+      }
+    }
+
+    function closePaletteMenu() {
+      const drop = document.getElementById('paletteDropdown');
+      if (drop) drop.classList.add('hidden');
+    }
+
+    document.addEventListener('click', function(e) {
+      const btn = document.getElementById('btnPaletteDropdown');
+      const drop = document.getElementById('paletteDropdown');
+      if (btn && drop && !btn.contains(e.target) && !drop.contains(e.target)) {
+        closePaletteMenu();
+      }
+    });
+
+    // CONTROLE DE ZOOM INDEPENDENTE DO CONTEÚDO CENTRAL
+    let currentZoom = 1.0;
+
+    function changeZoom(delta) {
+      currentZoom = Math.min(Math.max(currentZoom + delta, 0.75), 1.40);
+      applyZoom();
+    }
+
+    function resetZoom() {
+      currentZoom = 1.0;
+      applyZoom();
+    }
+
+    function applyZoom() {
+      const target = document.getElementById('scalableContent');
+      const display = document.getElementById('zoomDisplay');
+      if (target) {
+        // Usa style.zoom nativo para manter fluxo de rolagem perfeito
+        target.style.zoom = currentZoom;
+      }
+      if (display) {
+        display.innerText = `${Math.round(currentZoom * 100)}%`;
+      }
+    }
+
+    // CONTROLE DA COLUNA ESQUERDA (NAVEGAÇÃO)
+    let navOpen = true;
+
+    function toggleNavSidebar(forcedState) {
+      if (typeof forcedState !== 'undefined') {
+        navOpen = forcedState;
+      } else {
+        navOpen = !navOpen;
+      }
+
+      const sidebar = document.getElementById('navSidebar');
+      const label = document.getElementById('labelNavToggle');
+
+      if (navOpen) {
+        sidebar.style.marginLeft = '0px';
+        sidebar.style.width = window.innerWidth < 1024 ? '256px' : '288px';
+        sidebar.style.opacity = '1';
+        sidebar.style.pointerEvents = 'auto';
+        if (label) label.innerText = 'FECHAR';
+      } else {
+        sidebar.style.marginLeft = window.innerWidth < 1024 ? '-256px' : '-288px';
+        sidebar.style.width = '0px';
+        sidebar.style.opacity = '0';
+        sidebar.style.pointerEvents = 'none';
+        if (label) label.innerText = 'MENU';
+      }
+    }
+
+    // CONTROLE DA COLUNA DIREITA (CONSENSO)
+    let consensusOpen = true;
+    let consensusStretched = false;
+
+    function toggleConsensusSidebar(forcedState) {
+      if (typeof forcedState !== 'undefined') {
+        consensusOpen = forcedState;
+      } else {
+        consensusOpen = !consensusOpen;
+      }
+
+      const sidebar = document.getElementById('consensusSidebar');
+
+      if (consensusOpen) {
+        sidebar.style.marginRight = '0px';
+        sidebar.style.width = consensusStretched ? '440px' : (window.innerWidth < 1280 ? '320px' : '384px');
+        sidebar.style.opacity = '1';
+        sidebar.style.pointerEvents = 'auto';
+      } else {
+        const w = consensusStretched ? '440px' : '384px';
+        sidebar.style.marginRight = `-${w}`;
+        sidebar.style.width = '0px';
+        sidebar.style.opacity = '0';
+        sidebar.style.pointerEvents = 'none';
+      }
+    }
+
+    function toggleConsensusWidth() {
+      consensusStretched = !consensusStretched;
+      const sidebar = document.getElementById('consensusSidebar');
+      if (consensusOpen) {
+        sidebar.style.width = consensusStretched ? '440px' : (window.innerWidth < 1280 ? '320px' : '384px');
+      }
+    }
+
+    // Responsividade inicial
+    if (window.innerWidth < 1024) {
+      toggleNavSidebar(false);
+      toggleConsensusSidebar(false);
+    } else {
+      toggleNavSidebar(true);
+      toggleConsensusSidebar(true);
+    }
+
+    // DEFINIÇÃO DOS 7 PONTOS DE DELIBERAÇÃO COM MAPEAMENTO DE TRIANGULAÇÃO
+    const AGREEMENT_DEFINITIONS = [
+      {
+        id: 'chkPonto1',
+        targetSection: '#secao-diagnostico',
+        navLinkId: 'navLinkPonto1',
+        title: 'Saneamento Regulatório dos 4 Passivos UE',
+        category: 'DIAGNÓSTICO',
+        desc: 'Adequação da marca YOGANET, correção do RGPD 404, cadastro nativo auditável e matriz EQF Nível 4.'
+      },
+      {
+        id: 'optConsorcio',
+        isOption: true,
+        targetSection: '#secao-opcoes',
+        navLinkId: 'navLinkOpcoes',
+        title: 'Modelo Financeiro de Implementação',
+        category: 'FINANCEIRO',
+        desc: 'Definição do modelo de engenharia e produção curricular em 7 parcelas suaves.'
+      },
+      {
+        id: 'chkPonto3',
+        targetSection: '#secao-economicidade',
+        navLinkId: 'navLinkPonto3',
+        title: 'Produção Curricular com IA Generativa & Voz Autorizada',
+        category: 'ECONOMICIDADE',
+        desc: 'Esteira neural com amostras autorizadas dos Dadas para os 10 cursos, eliminando custos de passagens e estúdio.'
+      },
+      {
+        id: 'chkPonto4_1',
+        targetSection: '#secao-blindagem',
+        navLinkId: 'navLinkPonto4',
+        title: 'Faturas Legais de Exportação para Auditoria',
+        category: 'FISCAL',
+        desc: 'Emissão de faturas internacionais de subcontratação formal habilitadas perante a União Europeia.'
+      },
+      {
+        id: 'chkPonto4_2',
+        targetSection: '#secao-blindagem',
+        navLinkId: 'navLinkPonto4',
+        title: 'Fluxo Suave de Pagamento em 7 Meses',
+        category: 'FLUXO',
+        desc: 'Diluição dos pagamentos entre Dezembro/2026 e Junho/2027 acompanhando os marcos oficiais.'
+      },
+      {
+        id: 'chkPonto4_3',
+        targetSection: '#secao-blindagem',
+        navLinkId: 'navLinkPonto4',
+        title: 'Soberania Mestre no Espaço Vistara (Artigo 20)',
+        category: 'GOVERNANÇA',
+        desc: 'Domínio, repositório e acessos mestre registrados exclusivamente no nome da coordenadora Vistara.'
+      },
+      {
+        id: 'chkPonto4_4',
+        targetSection: '#secao-blindagem',
+        navLinkId: 'navLinkPonto4',
+        title: 'Ativo Comercial Perpétuo Pós-Erasmus+',
+        category: 'PATRIMÔNIO',
+        desc: 'Garantia de exploração autônoma de cursos e assinaturas para o Espaço Vistara após o projeto.'
+      }
+    ];
+
+    function selectOption(opt) {
+      if (opt === 'opcao1') {
+        document.getElementById('radioOpt1').checked = true;
+        document.getElementById('chosenOption').value = 'Opção 1 (Compartilhada: 8.900 €)';
+      } else {
+        document.getElementById('radioOpt2').checked = true;
+        document.getElementById('chosenOption').value = 'Opção 2 (Turnkey Soberana: 11.900 €)';
+      }
+      syncAgreements();
+    }
+
+    // SALTO INTERATIVO COM TRIANGULAÇÃO (DIREITA / ESQUERDA -> CENTRO)
+    function jumpToSection(targetSectionId, checkId) {
+      const container = document.getElementById('centerColumn');
+      const target = document.querySelector(targetSectionId);
+      if (target && container) {
+        const targetOffset = target.offsetTop - 15;
+        container.scrollTo({ top: targetOffset, behavior: 'smooth' });
+
+        if (checkId) {
+          const el = document.getElementById(checkId);
+          if (el && el.parentElement) {
+            el.parentElement.classList.add('ring-2', 'ring-[var(--accent-primary)]', 'scale-[1.01]');
+            setTimeout(() => {
+              el.parentElement.classList.remove('ring-2', 'ring-[var(--accent-primary)]', 'scale-[1.01]');
+            }, 1200);
+          }
+        }
+      }
+      highlightActiveNav(targetSectionId);
+    }
+
+    function syncAgreements() {
+      const feed = document.getElementById('rightAgreementsFeed');
+      if (!feed) return;
+
+      feed.innerHTML = '';
+      let confirmedCount = 0;
+      const totalCount = AGREEMENT_DEFINITIONS.length;
+
+      AGREEMENT_DEFINITIONS.forEach((item, index) => {
+        let isAgreed = false;
+        let details = item.desc;
+
+        if (item.isOption) {
+          isAgreed = true;
+          confirmedCount++;
+          const isOpt2 = document.getElementById('radioOpt2')?.checked;
+          const optLabel = isOpt2 ? 'Opção 2: Solução Turnkey Integral (11.900 €)' : 'Opção 1: Compartilhada (8.900 €)';
+          details = `Modelo: <strong>${optLabel}</strong> (7 parcelas).`;
+          
+          const navOpt = document.getElementById('navBadgeOption');
+          if (navOpt) navOpt.innerText = isOpt2 ? 'Opção 2' : 'Opção 1';
+        } else {
+          const el = document.getElementById(item.id);
+          if (el && el.checked) {
+            isAgreed = true;
+            confirmedCount++;
+          }
+        }
+
+        // Card dinâmico para a coluna direita COM TRIANGULAÇÃO DE CLIQUE
+        const card = document.createElement('div');
+        card.id = `consensusCard_${item.id}`;
+        card.className = `p-2.5 rounded-2xl border transition cursor-pointer hover:shadow-xs hover:scale-[1.01] ${
+          isAgreed 
+            ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-900' 
+            : 'bg-[var(--bg-card-subtle)] border-[var(--border-color)] text-[var(--text-muted)] opacity-65'
+        }`;
+
+        // Clique no card da direita pula diretamente para a seção no centro
+        card.onclick = () => jumpToSection(item.targetSection, item.isOption ? 'radioOpt2' : item.id);
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5 font-bold text-[11px]">
+              <span>${isAgreed ? '✅' : '⏳'}</span>
+              <span class="text-[9px] font-mono px-1.5 py-0.2 rounded-full ${isAgreed ? 'bg-emerald-200 text-emerald-900' : 'bg-gray-200 text-gray-700'}">${item.category}</span>
+              <span class="${isAgreed ? 'text-[var(--text-main)] font-semibold' : 'text-[var(--text-muted)]'}">${item.title}</span>
+            </div>
+            <span class="text-[9px] font-mono font-bold ${isAgreed ? 'text-emerald-700' : 'text-amber-700'}">
+              ${isAgreed ? 'OK' : 'PENDENTE'}
+            </span>
+          </div>
+          <div class="text-[10px] mt-1 pl-4 leading-relaxed">
+            ${details}
+          </div>
+        `;
+
+        feed.appendChild(card);
+      });
+
+      // Atualiza medidores de progresso
+      const pct = Math.round((confirmedCount / totalCount) * 100);
+      document.getElementById('rightProgressPercent').innerText = `${pct}% (${confirmedCount}/${totalCount})`;
+      document.getElementById('rightProgressBar').style.width = `${pct}%`;
+      document.getElementById('headerPillCount').innerText = `${confirmedCount}/${totalCount}`;
+
+      // Atualiza badges da sidebar esquerda
+      const chk1 = document.getElementById('chkPonto1')?.checked;
+      const nav1 = document.getElementById('navBadgePonto1');
+      if (nav1) {
+        nav1.innerText = chk1 ? 'Validado' : 'Pendente';
+        nav1.className = chk1 ? 'text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold' : 'text-[9px] font-mono px-1.5 py-0.5 rounded-full card-subtle text-[var(--text-muted)]';
+      }
+
+      const chk3 = document.getElementById('chkPonto3')?.checked;
+      const nav3 = document.getElementById('navBadgePonto3');
+      if (nav3) {
+        nav3.innerText = chk3 ? 'Validado' : 'Pendente';
+        nav3.className = chk3 ? 'text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold' : 'text-[9px] font-mono px-1.5 py-0.5 rounded-full card-subtle text-[var(--text-muted)]';
+      }
+
+      let sub4 = 0;
+      if (document.getElementById('chkPonto4_1')?.checked) sub4++;
+      if (document.getElementById('chkPonto4_2')?.checked) sub4++;
+      if (document.getElementById('chkPonto4_3')?.checked) sub4++;
+      if (document.getElementById('chkPonto4_4')?.checked) sub4++;
+      const nav4 = document.getElementById('navBadgePonto4');
+      if (nav4) {
+        nav4.innerText = `${sub4}/4`;
+        nav4.className = sub4 === 4 ? 'text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold' : 'text-[9px] font-mono px-1.5 py-0.5 rounded-full card-subtle text-[var(--text-muted)]';
+      }
+    }
+
+    // SCROLL SPY & TRIANGULAÇÃO VISUAL DINÂMICA
+    function initTriangulationScrollSpy() {
+      const container = document.getElementById('centerColumn');
+      if (!container) return;
+
+      const sectionList = ['#hero-visao', '#secao-instrucoes', '#secao-diagnostico', '#secao-opcoes', '#secao-economicidade', '#secao-blindagem', '#secao-deliberacao'];
+
+      container.addEventListener('scroll', () => {
+        let activeSection = sectionList[0];
+        const scrollPos = container.scrollTop + 140;
+
+        sectionList.forEach(id => {
+          const el = document.querySelector(id);
+          if (el) {
+            const top = el.offsetTop;
+            if (scrollPos >= top) {
+              activeSection = id;
+            }
+          }
+        });
+
+        highlightActiveNav(activeSection);
+      });
+    }
+
+    function highlightActiveNav(activeSectionId) {
+      // 1. Destaque no Menu Esquerdo
+      const navLinks = document.querySelectorAll('#navSidebar nav a');
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === activeSectionId) {
+          link.classList.add('bg-[var(--accent-primary)]', 'text-white', 'shadow-xs');
+          link.classList.remove('hover:bg-[var(--bg-card-subtle)]', 'text-[var(--text-main)]');
+        } else {
+          link.classList.remove('bg-[var(--accent-primary)]', 'text-white', 'shadow-xs');
+          link.classList.add('hover:bg-[var(--bg-card-subtle)]', 'text-[var(--text-main)]');
+        }
+      });
+
+      // 2. Destaque no Quadro de Consenso Direito (Borda de foco)
+      const feedCards = document.querySelectorAll('#rightAgreementsFeed > div');
+      feedCards.forEach(c => c.classList.remove('ring-2', 'ring-[var(--accent-primary)]'));
+
+      const activeItem = AGREEMENT_DEFINITIONS.find(d => d.targetSection === activeSectionId);
+      if (activeItem) {
+        const rightCard = document.getElementById(`consensusCard_${activeItem.id}`);
+        if (rightCard) {
+          rightCard.classList.add('ring-2', 'ring-[var(--accent-primary)]');
+        }
+      }
+    }
+
+    // GERENCIAMENTO DE RASCUNHO AUTOMÁTICO (AUTOSAVE CONTÍNUO)
+    function triggerAutoSaveDraft() {
+      const draft = {
+        chkPonto1: document.getElementById('chkPonto1')?.checked || false,
+        optConsorcio: document.getElementById('radioOpt2')?.checked ? '11900' : '8900',
+        chkPonto3: document.getElementById('chkPonto3')?.checked || false,
+        chkPonto4_1: document.getElementById('chkPonto4_1')?.checked || false,
+        chkPonto4_2: document.getElementById('chkPonto4_2')?.checked || false,
+        chkPonto4_3: document.getElementById('chkPonto4_3')?.checked || false,
+        chkPonto4_4: document.getElementById('chkPonto4_4')?.checked || false,
+        signerName: document.getElementById('signerName')?.value || '',
+        signerOrg: document.getElementById('signerOrg')?.value || 'Espaço Vistara (Portugal - Coordenador)',
+        signerEmail: document.getElementById('signerEmail')?.value || '',
+        signerNotes: document.getElementById('signerNotes')?.value || '',
+        savedAt: new Date().toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit' })
+      };
+      localStorage.setItem('yoganet_draft_state', JSON.stringify(draft));
+
+      const indicator = document.getElementById('draftSaveIndicator');
+      if (indicator) {
+        indicator.innerHTML = `<span>💾</span> Rascunho salvo às ${draft.savedAt}`;
+      }
+    }
+
+    function loadDraft() {
+      const raw = localStorage.getItem('yoganet_draft_state');
+      if (!raw) return;
+      try {
+        const draft = JSON.parse(raw);
+        if (draft.chkPonto1) document.getElementById('chkPonto1').checked = true;
+        if (draft.optConsorcio === '8900') {
+          document.getElementById('radioOpt1').checked = true;
+          document.getElementById('chosenOption').value = 'Opção 1 (Compartilhada: 8.900 €)';
+        } else {
+          document.getElementById('radioOpt2').checked = true;
+          document.getElementById('chosenOption').value = 'Opção 2 (Turnkey Soberana: 11.900 €)';
+        }
+        if (draft.chkPonto3) document.getElementById('chkPonto3').checked = true;
+        if (draft.chkPonto4_1) document.getElementById('chkPonto4_1').checked = true;
+        if (draft.chkPonto4_2) document.getElementById('chkPonto4_2').checked = true;
+        if (draft.chkPonto4_3) document.getElementById('chkPonto4_3').checked = true;
+        if (draft.chkPonto4_4) document.getElementById('chkPonto4_4').checked = true;
+
+        if (draft.signerName) document.getElementById('signerName').value = draft.signerName;
+        if (draft.signerOrg) document.getElementById('signerOrg').value = draft.signerOrg;
+        if (draft.signerEmail) document.getElementById('signerEmail').value = draft.signerEmail;
+        if (draft.signerNotes) document.getElementById('signerNotes').value = draft.signerNotes;
+
+        const indicator = document.getElementById('draftSaveIndicator');
+        if (indicator && draft.savedAt) {
+          indicator.innerHTML = `<span>💾</span> Rascunho recuperado (${draft.savedAt})`;
+        }
+      } catch (e) {
+        console.warn('Erro ao carregar rascunho:', e);
+      }
+    }
+
+    function clearDraft() {
+      if (!confirm('Deseja limpar todos os dados preenchidos no rascunho?')) return;
+      localStorage.removeItem('yoganet_draft_state');
+      document.getElementById('formSignOff').reset();
+      checkAllAgreements(false);
+      document.getElementById('radioOpt2').checked = true;
+      document.getElementById('chosenOption').value = 'Opção 2 (Turnkey Soberana: 11.900 €)';
+      syncAgreements();
+      const indicator = document.getElementById('draftSaveIndicator');
+      if (indicator) indicator.innerHTML = `<span>💾</span> Rascunho limpo`;
+    }
+
+    function checkAllAgreements(status) {
+      document.getElementById('chkPonto1').checked = status;
+      document.getElementById('chkPonto3').checked = status;
+      document.getElementById('chkPonto4_1').checked = status;
+      document.getElementById('chkPonto4_2').checked = status;
+      document.getElementById('chkPonto4_3').checked = status;
+      document.getElementById('chkPonto4_4').checked = status;
+      syncAgreements();
+      triggerAutoSaveDraft();
+    }
+
+    let latestPayload = null;
+    let editingIndex = null;
+
+    function handleSignOff(e) {
+      e.preventDefault();
+      const name = document.getElementById('signerName').value;
+      const org = document.getElementById('signerOrg').value;
+      const opt = document.getElementById('chosenOption').value;
+      const email = document.getElementById('signerEmail').value;
+      const notes = document.getElementById('signerNotes')?.value || 'Nenhuma ressalva registrada.';
+      const timestamp = new Date().toISOString();
+      const authCode = editingIndex !== null 
+        ? (JSON.parse(localStorage.getItem('yoganet_all_deliberations') || '[]')[editingIndex]?.auth_code || `YOGANET-${Date.now()}`)
+        : `YOGANET-${Date.now()}`;
+
+      const agreedItems = [];
+      AGREEMENT_DEFINITIONS.forEach(item => {
+        if (item.isOption) {
+          agreedItems.push(`[${item.category}] ${opt}`);
+        } else {
+          const el = document.getElementById(item.id);
+          if (el && el.checked) {
+            agreedItems.push(`[${item.category}] ${item.title}`);
+          }
+        }
+      });
+
+      const payload = {
+        auth_code: authCode,
+        timestamp: timestamp,
+        formatted_date: new Date().toLocaleString('pt-PT'),
+        name: name,
+        org: org,
+        option: opt,
+        email: email,
+        notes_doubts: notes,
+        agreed_points: agreedItems,
+        total_agreed: `${agreedItems.length}/7`
+      };
+
+      latestPayload = payload;
+
+      const allDeliberations = JSON.parse(localStorage.getItem('yoganet_all_deliberations') || '[]');
+      
+      if (editingIndex !== null && allDeliberations[editingIndex]) {
+        // Atualiza deliberação existente
+        allDeliberations[editingIndex] = payload;
+      } else {
+        // Adiciona nova deliberação no topo
+        allDeliberations.unshift(payload);
+      }
+
+      localStorage.setItem('yoganet_all_deliberations', JSON.stringify(allDeliberations));
+      localStorage.setItem('yoganet_decision_signoff', JSON.stringify(payload));
+      triggerAutoSaveDraft();
+
+      // Sincronização opcional com Google Apps Script
+      const gasUrl = localStorage.getItem('yoganet_gas_endpoint');
+      if (gasUrl) {
+        try {
+          fetch(gasUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } catch (err) {
+          console.warn('Sincronização com Google Sheets em espera:', err);
+        }
+      }
+
+      // Renderiza feedback
+      document.getElementById('confirmSummary').innerHTML = `<strong>Representante:</strong> ${name} · <strong>Entidade:</strong> ${org} · <strong>Decisão:</strong> ${opt}`;
+      
+      const notesBox = document.getElementById('confirmNotesDisplay');
+      if (notesBox) {
+        notesBox.innerHTML = `<strong>Dúvidas / Observações do Parceiro:</strong> "${notes}"`;
+      }
+
+      const listContainer = document.getElementById('confirmItemsList');
+      listContainer.innerHTML = `<strong>${agreedItems.length} Pontos Validados no Acordo:</strong><br>` + agreedItems.map(i => `✓ ${i}`).join('<br>');
+
+      document.getElementById('confirmTimestamp').innerText = `Autenticação do Dossiê: ${authCode} · Data/Hora: ${payload.formatted_date}`;
+      document.getElementById('confirmBox').classList.remove('hidden');
+      
+      cancelEditingMode();
+      renderRegistryTable();
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    // REABRIR O FORMULÁRIO PARA CONTINUAR EDITANDO
+    function reopenForEditing() {
+      document.getElementById('btnSubmit').disabled = false;
+      document.getElementById('btnSubmitIcon').innerText = '💾';
+      document.getElementById('btnSubmitText').innerText = 'Salvar Alterações no Registro';
+      document.getElementById('editModeBanner').classList.remove('hidden');
+      document.getElementById('signerNotes').focus();
+    }
+
+    // CARREGAR UMA DELIBERAÇÃO DA TABELA PARA EDIÇÃO
+    function editDeliberation(idx) {
+      const allDeliberations = JSON.parse(localStorage.getItem('yoganet_all_deliberations') || '[]');
+      const r = allDeliberations[idx];
+      if (!r) return;
+
+      editingIndex = idx;
+
+      // Popula campos
+      document.getElementById('signerName').value = r.name || '';
+      document.getElementById('signerOrg').value = r.org || 'Espaço Vistara (Portugal - Coordenador)';
+      document.getElementById('signerEmail').value = r.email || '';
+      document.getElementById('signerNotes').value = r.notes_doubts || '';
+
+      if (r.option && r.option.includes('8.900')) {
+        document.getElementById('radioOpt1').checked = true;
+        document.getElementById('chosenOption').value = 'Opção 1 (Compartilhada: 8.900 €)';
+      } else {
+        document.getElementById('radioOpt2').checked = true;
+        document.getElementById('chosenOption').value = 'Opção 2 (Turnkey Soberana: 11.900 €)';
+      }
+
+      // Restaura checks conforme lista de pontos
+      const pts = r.agreed_points || [];
+      document.getElementById('chkPonto1').checked = pts.some(p => p.includes('DIAGNÓSTICO'));
+      document.getElementById('chkPonto3').checked = pts.some(p => p.includes('ECONOMICIDADE'));
+      document.getElementById('chkPonto4_1').checked = pts.some(p => p.includes('FISCAL'));
+      document.getElementById('chkPonto4_2').checked = pts.some(p => p.includes('FLUXO'));
+      document.getElementById('chkPonto4_3').checked = pts.some(p => p.includes('GOVERNANÇA'));
+      document.getElementById('chkPonto4_4').checked = pts.some(p => p.includes('PATRIMÔNIO'));
+
+      syncAgreements();
+
+      // Ativa modo edição
+      document.getElementById('btnSubmit').disabled = false;
+      document.getElementById('btnSubmitIcon').innerText = '💾';
+      document.getElementById('btnSubmitText').innerText = 'Atualizar Este Registro na Base';
+      document.getElementById('editModeBanner').classList.remove('hidden');
+
+      jumpToSection('#secao-deliberacao');
+    }
+
+    function cancelEditingMode() {
+      editingIndex = null;
+      document.getElementById('editModeBanner').classList.add('hidden');
+      document.getElementById('btnSubmitIcon').innerText = '✍️';
+      document.getElementById('btnSubmitText').innerText = 'Autenticar & Salvar Deliberação';
+      document.getElementById('btnSubmit').disabled = false;
+    }
+
+    // EXCLUIR REGISTRO DA TABELA
+    function deleteDeliberation(idx) {
+      if (!confirm('Deseja realmente excluir este registro da base consolidada?')) return;
+      const allDeliberations = JSON.parse(localStorage.getItem('yoganet_all_deliberations') || '[]');
+      allDeliberations.splice(idx, 1);
+      localStorage.setItem('yoganet_all_deliberations', JSON.stringify(allDeliberations));
+      renderRegistryTable();
+    }
+
+    // DOWNLOAD DE JSON INDIVIDUAL DA TABELA
+    function downloadDeliberationJSON(idx) {
+      const allDeliberations = JSON.parse(localStorage.getItem('yoganet_all_deliberations') || '[]');
+      const item = allDeliberations[idx];
+      if (!item) return;
+
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(item, null, 2));
+      const dlAnchor = document.createElement('a');
+      dlAnchor.setAttribute("href", dataStr);
+      const cleanOrg = (item.org || 'consorcio').replace(/[^a-zA-Z0-9]/g, '_');
+      dlAnchor.setAttribute("download", `protocolo_deliberacao_${cleanOrg}_${Date.now()}.json`);
+      document.body.appendChild(dlAnchor);
+      dlAnchor.click();
+      dlAnchor.remove();
+    }
+
+    // DOWNLOAD DO ARQUIVO JSON DO PROTOCOLO ATUAL
+    function downloadLatestJSON() {
+      if (!latestPayload) {
+        latestPayload = JSON.parse(localStorage.getItem('yoganet_decision_signoff') || '{}');
+      }
+      if (!latestPayload.auth_code) {
+        alert('Nenhuma deliberação registrada para download.');
+        return;
+      }
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(latestPayload, null, 2));
+      const dlAnchor = document.createElement('a');
+      dlAnchor.setAttribute("href", dataStr);
+      const cleanOrg = (latestPayload.org || 'consorcio').replace(/[^a-zA-Z0-9]/g, '_');
+      dlAnchor.setAttribute("download", `protocolo_deliberacao_${cleanOrg}_${Date.now()}.json`);
+      document.body.appendChild(dlAnchor);
+      dlAnchor.click();
+      dlAnchor.remove();
+    }
+
+    // COPIAR RESUMO PARA WHATSAPP / E-MAIL
+    function copyDeliberationToClipboard() {
+      if (!latestPayload) {
+        latestPayload = JSON.parse(localStorage.getItem('yoganet_decision_signoff') || '{}');
+      }
+      if (!latestPayload.auth_code) {
+        alert('Nenhuma deliberação para copiar.');
+        return;
+      }
+
+      const text = `📋 PROTOCOLO DE DELIBERAÇÃO — YOGANET HUB (ERASMUS+)
+Autenticação: ${latestPayload.auth_code}
+Data: ${latestPayload.formatted_date}
+Representante: ${latestPayload.name} (${latestPayload.org})
+E-mail: ${latestPayload.email}
+
+⚖️ Decisão: ${latestPayload.option}
+Pontos Validados: ${latestPayload.total_agreed}
+
+Itens Acordados:
+${latestPayload.agreed_points.map(p => `✓ ${p}`).join('\n')}
+
+💬 Dúvidas / Observações:
+${latestPayload.notes_doubts}
+
+Arquivo digital gerado para o dossiê da Vistara.`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Protocolo copiado para a área de transferência! Pode colar no WhatsApp ou E-mail da Dra. Marcela e do consórcio.');
+      });
+    }
+
+    // EXPORTAR BASE CONSOLIDADA PARA PLANILHA CSV
+    function exportDeliberationsToCSV() {
+      const records = JSON.parse(localStorage.getItem('yoganet_all_deliberations') || '[]');
+      if (records.length === 0) {
+        alert('Nenhum registro para exportar ainda. Realize ao menos uma deliberação.');
+        return;
+      }
+
+      const headers = ['Autenticacao', 'Data_Hora', 'Representante', 'Entidade', 'Email', 'Opcao_Escolhida', 'Total_Validados', 'Duvidas_Observacoes'];
+      const rows = records.map(r => [
+        `"${r.auth_code || ''}"`,
+        `"${r.formatted_date || ''}"`,
+        `"${(r.name || '').replace(/"/g, '""')}"`,
+        `"${(r.org || '').replace(/"/g, '""')}"`,
+        `"${r.email || ''}"`,
+        `"${(r.option || '').replace(/"/g, '""')}"`,
+        `"${r.total_agreed || ''}"`,
+        `"${(r.notes_doubts || '').replace(/"/g, '""')}"`
+      ]);
+
+      const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + [headers.join(';'), ...rows.map(e => e.join(';'))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `base_deliberacoes_yoganet_${Date.now()}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    }
+
+    // RENDERIZAR TABELA DE REGISTROS NA PÁGINA (COM AÇÕES DE EDIÇÃO E EXCLUSÃO)
+    function renderRegistryTable() {
+      const tbody = document.getElementById('registryTableBody');
+      if (!tbody) return;
+
+      const records = JSON.parse(localStorage.getItem('yoganet_all_deliberations') || '[]');
+      if (records.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="p-3 text-center text-[var(--text-muted)] italic">Nenhuma deliberação registrada nesta sessão ainda.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = records.map((r, idx) => `
+        <tr class="hover:bg-[var(--bg-card-subtle)] transition">
+          <td class="p-2.5 font-mono text-[10px] whitespace-nowrap">${r.formatted_date || r.timestamp}</td>
+          <td class="p-2.5 font-semibold text-[var(--text-main)]">${r.name}</td>
+          <td class="p-2.5 text-[var(--accent-primary)] font-medium">${r.org}</td>
+          <td class="p-2.5 font-bold">${r.option}</td>
+          <td class="p-2.5 font-mono text-emerald-700">${r.total_agreed}</td>
+          <td class="p-2.5 text-[10px] text-[var(--text-muted)] max-w-xs truncate" title="${r.notes_doubts}">${r.notes_doubts}</td>
+          <td class="p-2.5 text-center whitespace-nowrap">
+            <div class="inline-flex items-center gap-1">
+              <button onclick="editDeliberation(${idx})" class="p-1 px-1.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 font-mono text-[10px] transition" title="Editar este registro">
+                ✏️ Editar
+              </button>
+              <button onclick="downloadDeliberationJSON(${idx})" class="p-1 px-1.5 rounded-md card-subtle hover:bg-white text-[var(--accent-primary)] font-mono text-[10px] transition" title="Baixar JSON">
+                📥
+              </button>
+              <button onclick="deleteDeliberation(${idx})" class="p-1 px-1.5 rounded-md hover:bg-red-100 text-red-600 font-mono text-[10px] transition" title="Excluir">
+                🗑️
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadDraft();
+      syncAgreements();
+      applyZoom();
+      renderRegistryTable();
+      initTriangulationScrollSpy();
+    });
+  </script>
+</body>
+</html>
